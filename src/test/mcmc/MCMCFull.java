@@ -34,6 +34,7 @@ import dr.evomodelxml.substmodel.HKYParser;
 import dr.ext.TreeLikelihoodExt;
 import dr.inference.loggers.MCLogger;
 import dr.inference.loggers.TabDelimitedFormatter;
+import dr.inference.markovchain.MarkovChain;
 import dr.inference.mcmc.MCMC;
 import dr.inference.mcmc.MCMCOptions;
 import dr.inference.model.Likelihood;
@@ -178,12 +179,16 @@ public class MCMCFull {
 	}
 
 	private static MCMCOptions setMCMCOptions(int logInterval) {
-		MCMCOptions options = new MCMCOptions();
-		options.setChainLength(logInterval * 500);;
-		options.setUseCoercion(false); // autoOptimize = true
-		options.setCoercionDelay(logInterval * 2);
-		options.setTemperature(1.0);
-		options.setFullEvaluationCount(logInterval*0);
+//		MCMCOptions options = new MCMCOptions();
+		MCMCOptions options = new MCMCOptions(logInterval * 500,
+				logInterval * 0, 1, MarkovChain.EVALUATION_TEST_THRESHOLD,
+				false, logInterval * 2, 1.0);
+
+//		options.setChainLength(logInterval * 500);;
+//		options.setUseCoercion(false); // autoOptimize = true
+//		options.setCoercionDelay(logInterval * 2);
+//		options.setTemperature(1.0);
+//		options.setFullEvaluationCount(logInterval*0);
 
 		return options;
 	}

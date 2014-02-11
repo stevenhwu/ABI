@@ -33,6 +33,7 @@ import dr.evomodelxml.substmodel.HKYParser;
 import dr.ext.TreeLikelihoodExt;
 import dr.inference.loggers.MCLogger;
 import dr.inference.loggers.TabDelimitedFormatter;
+import dr.inference.markovchain.MarkovChain;
 import dr.inference.mcmc.MCMC;
 import dr.inference.mcmc.MCMCOptions;
 import dr.inference.model.Likelihood;
@@ -82,7 +83,7 @@ public class MCMCTrueTree {
 		
 		DataImporter dataImporter = new DataImporter(dataDir);
 		Tree truePhylogeny = dataImporter.importTree(truePhylogenyFile);
-		TreeModel treeModel = new TreeModel(TreeModel.TREE_MODEL, truePhylogeny, false, false);
+		TreeModel treeModel = new TreeModel(TreeModel.TREE_MODEL, truePhylogeny, false);
 
 		Alignment shortReads = dataImporter.importAlignment(shortReadFile);
 		AlignmentMapping alignmentMapping = new AlignmentMapping(shortReads);
@@ -198,12 +199,14 @@ public class MCMCTrueTree {
 	}
 
 	private static MCMCOptions setMCMCOptions(int logInterval) {
-		MCMCOptions options = new MCMCOptions();
-		options.setChainLength(logInterval * 300);;
-		options.setUseCoercion(true); // autoOptimize = true
-		options.setCoercionDelay(logInterval * 2);
-		options.setTemperature(1.0);
-		options.setFullEvaluationCount(logInterval*0);
+		MCMCOptions options = new MCMCOptions(logInterval * 300,
+				logInterval * 0, 1, MarkovChain.EVALUATION_TEST_THRESHOLD,
+				false, logInterval * 5, 1.0);
+//		options.setChainLength(logInterval * 300);;
+//		options.setUseCoercion(true); // autoOptimize = true
+//		options.setCoercionDelay(logInterval * 2);
+//		options.setTemperature(1.0);
+//		options.setFullEvaluationCount(logInterval*0);
 
 		return options;
 	}

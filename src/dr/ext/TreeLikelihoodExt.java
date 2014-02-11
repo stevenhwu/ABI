@@ -98,7 +98,7 @@ public class TreeLikelihoodExt extends TreeLikelihood {
         likelihoodKnown = false;
 		
         patternLogLikelihoods = new double[patternCount];
-        resetRootPartials();
+//        resetRootPartials();//TODO This will FAIL!! need to change BEAST code to make this method work
 //        rootPartials = new double[patternCount * stateCount];
 
 //	}

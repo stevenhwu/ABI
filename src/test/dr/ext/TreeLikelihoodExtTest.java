@@ -106,7 +106,7 @@ public class TreeLikelihoodExtTest {
 		ShortReadLikelihood srpLikelihood = new ShortReadLikelihood(haplotypeModel);
 		ShortReadLikelihood srpLikelihoodUpdate = new ShortReadLikelihood(haplotypeModel);
 		
-		TreeModel treeModel = new TreeModel(TreeModel.TREE_MODEL, truePhylogeny, false, false);
+		TreeModel treeModel = new TreeModel(TreeModel.TREE_MODEL, truePhylogeny, false);
 
     	//treeLikelihood
     	SitePatterns patterns = new SitePatterns(trueAlignment, null, 0, -1, 1, true);
@@ -230,7 +230,7 @@ public class TreeLikelihoodExtTest {
 //					System.out.println(Arrays.toString(sps[i]));
 //			}
 		
-		TreeModel treeModel = new TreeModel(TreeModel.TREE_MODEL, truePhylogeny, false, false);
+		TreeModel treeModel = new TreeModel(TreeModel.TREE_MODEL, truePhylogeny, false);
 		
 
 //			LikelihoodCalculation likelihoodModel = new LikelihoodCalculation(treeModel, aMap, trueHaplotypes);
